@@ -52,7 +52,8 @@ public class LandingPageController {
 	}
 	
 	@RequestMapping("/experience")
-	public String experience(Map<String, Object> model) {
+	public String experience(Map<String, Object> model,@ModelAttribute("searchExpForm") SearchForm form) {
+		model.put("searchExpData", form);
 		return "experiences";
 	}
 	

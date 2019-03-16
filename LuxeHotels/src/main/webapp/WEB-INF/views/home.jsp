@@ -169,7 +169,7 @@
               </div>
 
               <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-              	<form:form action="#" class="search-destination" modelAttribute="searchExpForm">
+              	<form:form action="/experience" class="search-destination" modelAttribute="searchExpForm">
               		<div class="row">
               			<div class="col-md align-items-end">
               				<div class="form-group">

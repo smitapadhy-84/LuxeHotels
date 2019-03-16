@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lang="en">
   <head>
     <title>Luxe Hotels</title>
@@ -79,34 +81,23 @@
         	<div class="col-lg-3 sidebar order-md-last ftco-animate">
         		<div class="sidebar-wrap ftco-animate">
         			<h3 class="heading mb-4">Find City</h3>
-        			<form action="#">
+        			<form:form action="#" modelAttribute="searchExpData">
         				<div class="fields">
 		              <div class="form-group">
-		                <input type="text" class="form-control" placeholder="Destination, City">
+		                <form:input path="destination" type="text" class="form-control" placeholder="Destination, City"/>
 		              </div>
 
 		              <div class="form-group">
-		                <input type="text" id="checkin_date" class="form-control checkin_date" placeholder="Date from">
+		                <form:input path="fromDate" type="text" id="checkin_date" class="form-control checkin_date" placeholder="Date from"/>
 		              </div>
 		              <div class="form-group">
-		                <input type="text" id="checkout_date" class="form-control checkout_date" placeholder="Date to">
-		              </div>
-		              <div class="form-group">
-		              	<div class="range-slider">
-		              		<span>
-										    <input type="number" value="25000" min="0" max="120000"/>	-
-										    <input type="number" value="50000" min="0" max="120000"/>
-										  </span>
-										  <input value="1000" min="0" max="120000" step="500" type="range"/>
-										  <input value="50000" min="0" max="120000" step="500" type="range"/>
-										  </svg>
-										</div>
+		                <form:input path="toDate" type="text" id="checkout_date" class="form-control checkout_date" placeholder="Date to"/>
 		              </div>
 		              <div class="form-group">
 		                <input type="submit" value="Search" class="btn btn-primary py-3 px-5">
 		              </div>
 		            </div>
-	            </form>
+	            </form:form>
         		</div>
         		<div class="sidebar-wrap ftco-animate">
         			<h3 class="heading mb-4">Star Rating</h3>
