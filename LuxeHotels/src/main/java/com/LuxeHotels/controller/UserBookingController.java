@@ -2,6 +2,8 @@ package com.LuxeHotels.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,15 @@ public class UserBookingController {
 
 	
 	@RequestMapping("/userBookings")
-	public String myBookings(Map<String, Object> model, @RequestParam("userId") String userId) {
+	public String myBookings(Map<String, Object> model, @RequestParam( value="userId" , required = false) String userId , 
+			HttpServletRequest request) {
+		
+		boolean isAuthenticated = request.getSession().getAttribute("userAuthenticated")==null?false:(Boolean)request.getSession().getAttribute("userAuthenticated");
+		
+		if(!isAuthenticated)
+		{
+			return "redirect:/login"; 
+		}
 		
 		UserPersonlisedData userData = service.getUserPersonalisedData(userId);
 		model.put("userData", userData);

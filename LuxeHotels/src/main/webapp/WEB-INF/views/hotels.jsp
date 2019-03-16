@@ -39,13 +39,17 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
+	          <c:if test = "${userAuthenticated}">
+	          <li class="nav-item"><span class="nav-link">Welcome <c:out value = "${fbProfile.name}"/>!</span></li>
+	          </c:if>
 	          <li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
 	          <li class="nav-item active"><a href="/hotels" class="nav-link">Hotels</a></li>
 	          <li class="nav-item"><a href="/experience" class="nav-link">Experiences</a></li>
 	          <c:choose>
          		<c:when test = "${userAuthenticated}">
          		<c:set var = "userId" scope = "session" value = "${fbProfile.id}"/>
-	          		<li class="nav-item"><a href="/userBookings?userId=${userId}" class="nav-link">My Bookings</a></li>
+	          		<li class="nav-item"><a href="/userBookings?userId=${userId}" class="nav-link">Bookings</a></li>
+	          		<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
 	          	</c:when>
 	          	<c:otherwise>
 	          	   <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
@@ -80,18 +84,7 @@
 		              <div class="form-group">
 		                <input type="text" class="form-control" placeholder="Destination, City">
 		              </div>
-		              <div class="form-group">
-		                <div class="select-wrap one-third">
-	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="" id="" class="form-control" placeholder="Keyword search">
-	                      <option value="">Select Location</option>
-	                      <option value="">San Francisco USA</option>
-	                      <option value="">Berlin Germany</option>
-	                      <option value="">Lodon United Kingdom</option>
-	                      <option value="">Paris Italy</option>
-	                    </select>
-	                  </div>
-		              </div>
+
 		              <div class="form-group">
 		                <input type="text" id="checkin_date" class="form-control checkin_date" placeholder="Date from">
 		              </div>
@@ -163,7 +156,7 @@
 		    					<div class="text p-3">
 		    						<div class="d-flex">
 		    							<div class="one">
-				    						<h3><a href="#">New Orleans, LA</a></h3>
+				    						<h3><a href="#">Istanbul, Turkey</a></h3>
 				    						<p class="rate">
 				    							<i class="icon-star"></i>
 				    							<i class="icon-star"></i>
@@ -177,10 +170,10 @@
 			    							<span class="price per-price">$40<br><small>/night</small></span>
 		    							</div>
 		    						</div>
-		    						<p>Far far away, behind the word mountains, far from the countries</p>
+		    						
 		    						<hr>
 		    						<p class="bottom-area d-flex">
-		    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+		    							 
 		    							<span class="ml-auto"><a href="#">Book Now</a></span>
 		    						</p>
 		    					</div>
@@ -196,7 +189,7 @@
 		    					<div class="text p-3">
 		    						<div class="d-flex">
 		    							<div class="one">
-				    						<h3><a href="#">New Orleans, LA</a></h3>
+				    						<h3><a href="#">Bali, Indonesia</a></h3>
 				    						<p class="rate">
 				    							<i class="icon-star"></i>
 				    							<i class="icon-star"></i>
@@ -210,10 +203,10 @@
 			    							<span class="price per-price">$40<br><small>/night</small></span>
 		    							</div>
 		    						</div>
-		    						<p>Far far away, behind the word mountains, far from the countries</p>
+		    						
 		    						<hr>
 		    						<p class="bottom-area d-flex">
-		    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+		    							 
 		    							<span class="ml-auto"><a href="#">Book Now</a></span>
 		    						</p>
 		    					</div>
@@ -229,7 +222,7 @@
 		    					<div class="text p-3">
 		    						<div class="d-flex">
 		    							<div class="one">
-				    						<h3><a href="#">New Orleans, LA</a></h3>
+				    						<h3><a href="#">Singapore</a></h3>
 				    						<p class="rate">
 				    							<i class="icon-star"></i>
 				    							<i class="icon-star"></i>
@@ -243,10 +236,10 @@
 			    							<span class="price per-price">$40<br><small>/night</small></span>
 		    							</div>
 		    						</div>
-		    						<p>Far far away, behind the word mountains, far from the countries</p>
+		    						
 		    						<hr>
 		    						<p class="bottom-area d-flex">
-		    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+		    							 
 		    							<span class="ml-auto"><a href="#">Book Now</a></span>
 		    						</p>
 		    					</div>
@@ -262,7 +255,7 @@
 		    					<div class="text p-3">
 		    						<div class="d-flex">
 		    							<div class="one">
-				    						<h3><a href="#">New Orleans, LA</a></h3>
+				    						<h3><a href="#">Miami, FL</a></h3>
 				    						<p class="rate">
 				    							<i class="icon-star"></i>
 				    							<i class="icon-star"></i>
@@ -276,10 +269,10 @@
 			    							<span class="price per-price">$40<br><small>/night</small></span>
 		    							</div>
 		    						</div>
-		    						<p>Far far away, behind the word mountains, far from the countries</p>
+		    						
 		    						<hr>
 		    						<p class="bottom-area d-flex">
-		    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+		    							 
 		    							<span class="ml-auto"><a href="#">Book Now</a></span>
 		    						</p>
 		    					</div>
@@ -288,6 +281,39 @@
 		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 		    				<div class="destination">
 		    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/hotel-5.jpg);">
+		    						<div class="icon d-flex justify-content-center align-items-center">
+		    							<span class="icon-link"></span>
+		    						</div>
+		    					</a>
+		    					<div class="text p-3">
+		    						<div class="d-flex">
+		    							<div class="one">
+				    						<h3><a href="#">Texas, DL</a></h3>
+				    						<p class="rate">
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star-o"></i>
+				    							<span>8 Rating</span>
+				    						</p>
+			    						</div>
+			    						<div class="two">
+			    							<span class="price per-price">$40<br><small>/night</small></span>
+		    							</div>
+		    						</div>
+		    						
+		    						<hr>
+		    						<p class="bottom-area d-flex">
+		    							 
+		    							<span class="ml-auto"><a href="#">Book Now</a></span>
+		    						</p>
+		    					</div>
+		    				</div>
+		    			</div>
+		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
+		    				<div class="destination">
+		    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/hotel-6.jpg);">
 		    						<div class="icon d-flex justify-content-center align-items-center">
 		    							<span class="icon-link"></span>
 		    						</div>
@@ -309,43 +335,10 @@
 			    							<span class="price per-price">$40<br><small>/night</small></span>
 		    							</div>
 		    						</div>
-		    						<p>Far far away, behind the word mountains, far from the countries</p>
+		    						
 		    						<hr>
 		    						<p class="bottom-area d-flex">
-		    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-		    							<span class="ml-auto"><a href="#">Book Now</a></span>
-		    						</p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="destination">
-		    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/hotel-5.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-link"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<div class="d-flex">
-		    							<div class="one">
-				    						<h3><a href="#">New Orleans, LA</a></h3>
-				    						<p class="rate">
-				    							<i class="icon-star"></i>
-				    							<i class="icon-star"></i>
-				    							<i class="icon-star"></i>
-				    							<i class="icon-star"></i>
-				    							<i class="icon-star-o"></i>
-				    							<span>8 Rating</span>
-				    						</p>
-			    						</div>
-			    						<div class="two">
-			    							<span class="price per-price">$40<br><small>/night</small></span>
-		    							</div>
-		    						</div>
-		    						<p>Far far away, behind the word mountains, far from the countries</p>
-		    						<hr>
-		    						<p class="bottom-area d-flex">
-		    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+		    							 
 		    							<span class="ml-auto"><a href="#">Book Now</a></span>
 		    						</p>
 		    					</div>
@@ -353,26 +346,12 @@
 		    			</div>
 		    		</div>
 
-          	<div class="row mt-5">
-		          <div class="col text-center">
-		            <div class="block-27">
-		              <ul>
-		                <li><a href="#">&lt;</a></li>
-		                <li class="active"><span>1</span></li>
-		                <li><a href="#">2</a></li>
-		                <li><a href="#">3</a></li>
-		                <li><a href="#">4</a></li>
-		                <li><a href="#">5</a></li>
-		                <li><a href="#">&gt;</a></li>
-		              </ul>
-		            </div>
-		          </div>
-		        </div>
+
           </div> <!-- .col-md-8 -->
         </div>
       </div>
     </section> <!-- .section -->
-
+ <c:if test = "${not userAuthenticated}">
 		<section class="ftco-section-parallax">
       <div class="parallax-img d-flex align-items-center">
         <div class="container">
@@ -395,6 +374,7 @@
         </div>
       </div>
     </section>
+    </c:if>
 
  <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">

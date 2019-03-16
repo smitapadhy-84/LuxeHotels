@@ -67,15 +67,15 @@
       <div class="container">
         <div class="row block-9">
           <div class="col-md-6 order-md-last pr-md-5">
-            <form action="#">
+            <form action="/signin">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
+                <input type="text" class="form-control" name="userName" placeholder="Your username">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password">
               </div>
               <div class="form-group">
-                <input type="submit" value="Sign In" class="btn btn-primary py-3 px-5">
+                <input type="submit" value="Sign In" class="form-control btn btn-primary">
               </div>
             </form>
           </div>

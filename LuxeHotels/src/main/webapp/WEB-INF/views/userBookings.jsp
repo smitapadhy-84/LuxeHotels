@@ -41,11 +41,13 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="/home" class="nav-link">Home</a></li>
+	          <li class="nav-item"><span class="nav-link">Welcome <c:out value = "${fbProfile.name}"/>!</span></li>
+	          <li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/hotels" class="nav-link">Hotels</a></li>
 	          <li class="nav-item"><a href="/experience" class="nav-link">Experiences</a></li>
 	          <c:set var = "userId" scope = "session" value = "${fbProfile.id}"/>
-	          <li class="nav-item active"><a href="/userBookings?userId=${userId}" class="nav-link">My Bookings</a></li>
+	          <li class="nav-item active"><a href="/userBookings?userId=${userId}" class="nav-link">Bookings</a></li>
+	          <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -75,13 +77,13 @@
             <p><span>Address:</span> 198 West 21th Street, Suite 721 Singapore 10016 <br> <a href="tel://1234567920">+ 12345678</a></p>
           </div>
           <div class="col-md-2">
-            <p><span>Room Type: </span> <a href="#">Executive Suite</a></p>
+            <p><span>Room Type: </span> <a href="#"><c:out value="${userData.bookingDtls.roomType}"></c:out></a></p>
           </div>
           <div class="col-md-2">
-            <p><span>From: </span>11-Arp-2019</p>
+            <p><span>From: </span><c:out value="${userData.bookingDtls.startDate}"></c:out></p>
           </div>
           <div class="col-md-2">
-            <p><span>To: </span>15-Apr-2019</p>
+            <p><span>To: </span><c:out value="${userData.bookingDtls.endDate}"></c:out></p>
           </div>
           <div class="col-md-2">
             <p><span>Guest: </span><c:out value="${userData.bookingDtls.guests}"></c:out></p>
@@ -166,7 +168,7 @@
     	<div class="container">
     		<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
-            <h4 class="mb-4">Experience Singapore</h2>
+            <h4 class="mb-4">Experience <c:out value="${userData.bookingDtls.city}"/></h4>
           </div>
         </div>
         <div class="row">
@@ -188,7 +190,7 @@
     	<div class="container">
     		<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
-            <h4 class="mb-4">Hidden gems of Singapore</h4>
+            <h4 class="mb-4">Hidden gems of <c:out value="${userData.bookingDtls.city}"/></h4>
           </div>
         </div>
         <div class="row">

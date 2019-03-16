@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lang="en">
   <head>
     <title>Luxe Hotels</title>
@@ -39,13 +41,17 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
+	          <c:if test = "${userAuthenticated}">
+	          <li class="nav-item"><span class="nav-link">Welcome <c:out value = "${fbProfile.name}"/>!</span></li>
+	          </c:if>
 	          <li class="nav-item active"><a href="/home" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/hotels" class="nav-link">Hotels</a></li>
 	          <li class="nav-item"><a href="/experience" class="nav-link">Experiences</a></li>
 	          <c:choose>
          		<c:when test = "${userAuthenticated}">
          		<c:set var = "userId" scope = "session" value = "${fbProfile.id}"/>
-	          		<li class="nav-item"><a href="/userBookings?userId=${userId}" class="nav-link">My Bookings</a></li>
+	          		<li class="nav-item"><a href="/userBookings?userId=${userId}" class="nav-link">Bookings</a></li>
+	          		<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
 	          	</c:when>
 	          	<c:otherwise>
 	          	   <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
@@ -84,14 +90,14 @@
             <div class="tab-content p-4 px-5" id="v-pills-tabContent">
 
               <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-              	<form action="/rooms" class="search-destination">
+              	<form:form action="/rooms" modelAttribute="searchForm" class="search-destination">
               		<div class="row">
               			<div class="col-md align-items-end">
               				<div class="form-group">
               					<label for="#">Destination</label>
 	              				<div class="form-field">
 	              					<div class="icon"><span class="icon-my_location"></span></div>
-					                <input type="text" class="form-control" placeholder="Where">
+					                <form:input type="text" path="destination" class="form-control" placeholder="Where" />
 					              </div>
 				              </div>
               			</div>
@@ -101,7 +107,7 @@
               					<label for="#">Check In</label>
               					<div class="form-field">
 	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkin_date" placeholder="Check In">
+					                <form:input type="text" path="fromDate" class="form-control checkin_date" placeholder="Check In" />
 					              </div>
 				              </div>
               			</div>
@@ -110,7 +116,7 @@
               					<label for="#">Check Out</label>
               					<div class="form-field">
 	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkout_date" placeholder="From">
+					                <form:input type="text" path="toDate" class="form-control checkout_date" placeholder="Check Out" />
 					              </div>
 				              </div>
               			</div>
@@ -120,13 +126,14 @@
               					<div class="form-field">
 	              					<div class="select-wrap">
 			                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                      <select name="" id="" class="form-control">
-			                      	<option value="">1</option>
-			                        <option value="">2</option>
-			                        <option value="">3</option>
-			                        <option value="">4</option>
-			                        <option value="">5</option>
-			                      </select>
+			                      <form:select path="guests" id="" class="form-control">
+			                       <option value="0">Select</option>
+			                      	<option value="1">1</option>
+			                        <option value="2">2</option>
+			                        <option value="3">3</option>
+			                        <option value="4">4</option>
+			                        <option value="5">5</option>
+			                      </form:select>
 			                    </div>
 					              </div>
 				              </div>
@@ -138,13 +145,14 @@
               					<div class="form-field">	
 	              					<div class="select-wrap">
 			                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                      <select name="" id="" class="form-control">
-			                      	<option value="">Business</option>
-			                        <option value="">Getaway</option>
-			                        <option value="">Extended Stay</option>
-			                        <option value="">Medical travel</option>
-			                        <option value="">Staycation</option>
-			                      </select>
+			                      <form:select path="purpose" id="" class="form-control">
+			                      <option value="0">Select</option>
+			                      	<option value="Business">Business</option>
+			                        <option value="Getaway">Getaway</option>
+			                        <option value="Extended">Extended Stay</option>
+			                        <option value="Medical">Medical travel</option>
+			                        <option value="Staycation">Staycation</option>
+			                      </form:select>
 			                    </div>
 					              </div>
 				              </div>
@@ -157,56 +165,40 @@
 				              </div>
               			</div>
               		</div>
-              	</form>
+              	</form:form>
               </div>
 
               <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-              	<form action="#" class="search-destination">
+              	<form:form action="#" class="search-destination" modelAttribute="searchExpForm">
               		<div class="row">
               			<div class="col-md align-items-end">
               				<div class="form-group">
               					<label for="#">Destination</label>
 	              				<div class="form-field">
 	              					<div class="icon"><span class="icon-my_location"></span></div>
-					                <input type="text" class="form-control" placeholder="Where">
+					                <form:input path="destination" type="text" class="form-control" placeholder="Where"/>
 					              </div>
 				              </div>
               			</div>
               			<div class="col-md align-items-end">
               				<div class="form-group">
-              					<label for="#">Check In</label>
+              					<label for="#">From</label>
               					<div class="form-field">
 	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkin_date" placeholder="Check In">
+					                <form:input path="fromDate" type="text" class="form-control checkin_date" placeholder="From" />
 					              </div>
 				              </div>
               			</div>
               			<div class="col-md align-items-end">
               				<div class="form-group">
-              					<label for="#">Check Out</label>
+              					<label for="#">To</label>
               					<div class="form-field">
 	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkout_date" placeholder="From">
+					                <form:input path="toDate" type="text" class="form-control checkout_date" placeholder="To"/>
 					              </div>
 				              </div>
               			</div>
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Guest</label>
-              					<div class="form-field">
-	              					<div class="select-wrap">
-			                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                      <select name="" id="" class="form-control">
-			                      	<option value="">1</option>
-			                        <option value="">2</option>
-			                        <option value="">3</option>
-			                        <option value="">4</option>
-			                        <option value="">5</option>
-			                      </select>
-			                    </div>
-					              </div>
-				              </div>
-              			</div>
+              			
               			<div class="col-md align-self-end">
               				<div class="form-group">
               					<div class="form-field">
@@ -215,49 +207,10 @@
 				              </div>
               			</div>
               		</div>
-              	</form>
+              	</form:form>
               </div>
 
-              <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-effect-tab">
-              	<form action="#" class="search-destination">
-              		<div class="row">
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Where</label>
-              					<div class="form-field">
-	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control" placeholder="Where">
-					              </div>
-				              </div>
-              			</div>
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Check In</label>
-              					<div class="form-field">
-	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkin_date" placeholder="Check In">
-					              </div>
-				              </div>
-              			</div>
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Check Out</label>
-              					<div class="form-field">
-	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkout_date" placeholder="From">
-					              </div>
-				              </div>
-              			</div>
-              			<div class="col-md align-self-end">
-              				<div class="form-group">
-              					<div class="form-field">
-					                <input type="submit" value="Search" class="form-control btn btn-primary">
-					              </div>
-				              </div>
-              			</div>
-              		</div>
-              	</form>
-              </div>
+              
             </div>
           </div>
         </div>
